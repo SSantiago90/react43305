@@ -1,59 +1,52 @@
-import logo from "./logo.svg";
 import "./App.css";
+import ButtonComponent from "./components/ButtonComponent/ButtonComponent";
+import Item from "./components/Item/Item";
+import Saludo from "./components/Saludo/Saludo";
 
 function App() {
-  const palabra = "React";
-  const saludo = `Este es el curso de ${palabra}`;
+  const botones = [
+    { label: "Boton Principal" },
+    { label: "Otro Boton" },
+    { label: "Texto 3" },
+  ];
 
-  function crearSaludo(nombre) {
-    return `Hola ${nombre}`;
-  }
-
-  function calcularAlto() {
-    return "200px";
-  }
-
-  const styleSaludo = {
-    height: calcularAlto(),
-    color: "green",
-    backgroundColor: "white",
-  };
+  const items = [
+    {
+      title: "Pantalon Azul",
+      price: 100,
+      img: "https://alcatraz.com.ar/wp-content/uploads/2021/09/Pantalon-Ultra-azul_0000s_0006_Pantalon-Ultra-3.jpg",
+    },
+  ];
 
   return (
     <div>
       <button>Click me</button>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{saludo}</p>
-
-          {1 + 2 + 3}
-          <br />
-          {"1 + 2 + 3"}
-
-          <div style={styleSaludo} className="saludo">
-            {crearSaludo("Marcelo")}
+          
+          <div className="saludo">            
+            <Saludo user="Juan X" />
+            <Saludo user="Santiago" />
           </div>
 
-          <label htmlFor="name">
-            Nombre:
-            <input name="name" placeholder="ingresa tu nombre" />
-          </label>
+          <ButtonComponent colorFondo="red">{botones[0].label}</ButtonComponent>
+          <ButtonComponent colorFondo="purple">
+            {botones[1].label}
+          </ButtonComponent>
 
-          <label htmlFor="age">
-            Edad:
-            <input name="age" placeholder="ingresa tu nombre" />
-          </label>
+          <ButtonComponent>
+            <div>
+              <h1>Clickeame</h1>
+              <small>Soy otro botón</small>
+            </div>
+          </ButtonComponent>
 
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
+        <div>
+          <Item img="/assets/remera.bmp" title="Remera 1" price={50} />
+          <Item {...items[0]} />
+        </div>
+
       </div>
     </div>
   );
