@@ -1,19 +1,16 @@
-import "./button.css";
+import styles from "./button.module.css";
 
 function ButtonComponent(props) {
-  /* { colorFondo: "red", label: "Boton"} */
-  // destructuring
   const { children, colorFondo } = props;
 
-  console.log(props);
-
-  const styleButton = {
-    backgroundColor: colorFondo,
+  // CSS inline con atributo style
+  const stylesBtn = {
+    backgroundColor: "colorFondo",
   };
 
   return (
     <>
-      <button style={styleButton} className="btn">
+      <button style={stylesBtn} className={styles.btn}>
         {children}
       </button>
     </>
