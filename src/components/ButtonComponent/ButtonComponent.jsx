@@ -5,8 +5,6 @@ function ButtonComponent(props) {
   // destructuring
   const { children, colorFondo } = props;
 
-  console.log(props);
-
   const styleButton = {
     backgroundColor: colorFondo,
   };
