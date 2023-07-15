@@ -1,23 +1,30 @@
 import { useState, useEffect } from "react";
-import getData from "../../services/asyncMock";
+import getData, { getCategoryData } from "../../services/asyncMock";
 import Item from "../Item/Item";
+import { useParams } from "react-router-dom";
 
 function ItemListContainer() {
-  // 1. Obtener de forma asíncrona los datos del ecommerce
-  // 2. Guardamos la respuesta en un Estado -> useState
-  // 3. Usamos key para el map
-  // 4. Hacer un llamado a getData en un effect
-
-  console.log("Renderizamos item list container");
   const [products, setProducts] = useState([]);
+  const { categoryId } = useParams();
 
   async function requestProducts() {
-    const respuesta = await getData();
+    /*  "/" -> categoryId -> undefined */
+    /*  "/category/remeras" -> categoryId -> remeras */
+
+    /*  let respuesta = [];
+    if(categoryId === undefined) {
+      respuesta = await getData();
+    }
+    else {
+      respuesta = await getData(categoryId);
+    } */
+    let respuesta = categoryId
+      ? await getCategoryData(categoryId)
+      : await getData();
     setProducts(respuesta);
   }
 
   useEffect(() => {
-    console.log("Montaje ILC");
     requestProducts();
   }, []);
 
