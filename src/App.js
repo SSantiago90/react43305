@@ -13,14 +13,7 @@ function App() {
           <Route path="/" element={<ItemListContainer />} />
           <Route path="/category/:categoryId" element={<ItemListContainer />} />
 
-          <Route
-            path="/prueba"
-            element={
-              <h1>
-                Prueba<button>Volver</button>
-              </h1>
-            }
-          />
+          <Route path="/prueba" element={<h1>Prueba</h1>} />
           {/* Ruta con segmento URL dinamico */}
           <Route path="/product/:id" element={<ItemDetailContainer />} />
           <Route path="*" element={<h1>Page not found: 404</h1>} />
