@@ -3,14 +3,12 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createContext } from "react";
-
-const cartContext = createContext({ cart: [] });
+import { CartContextProvider } from "./context/cartContext";
 
 function App() {
   return (
     <div className="app-body">
-      <cartContext.Provider value={{ cart: [1, 5, 10], prueba: "ok" }}>
+      <CartContextProvider>
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -21,16 +19,13 @@ function App() {
             />
 
             <Route path="/prueba" element={<h1>Prueba</h1>} />
-            {/* Ruta con segmento URL dinamico */}
             <Route path="/product/:id" element={<ItemDetailContainer />} />
             <Route path="*" element={<h1>Page not found: 404</h1>} />
           </Routes>
         </BrowserRouter>
-      </cartContext.Provider>
+      </CartContextProvider>
     </div>
   );
 }
 
 export default App;
-
-export { cartContext };

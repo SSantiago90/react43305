@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getProductData } from "../../services/asyncMock";
 import { Link, useParams } from "react-router-dom";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import ItemCount from "../ItemCount/ItemCount";
+import { cartContext } from "../../context/cartContext";
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState({});
   const { id } = useParams();
+
+  const { addToCart } = useContext(cartContext);
 
   useEffect(() => {
     async function requestProduct() {
@@ -18,6 +21,7 @@ function ItemDetailContainer() {
   }, [id]);
 
   function handleAddToCart(clickCount) {
+    addToCart(product, clickCount);
     alert(`Producto agregado al carrito, cantidad: ${clickCount}`);
   }
 
