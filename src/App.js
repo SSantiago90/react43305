@@ -5,11 +5,6 @@ import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createContext } from "react";
 
-// 1 Crear el context
-// 2 importar/exportar
-// 3 consumirlo
-// 4 Crear un provider
-// 5 Crear una prop Value
 const cartContext = createContext({ cart: [] });
 
 function App() {
