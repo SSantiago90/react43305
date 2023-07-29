@@ -17,6 +17,11 @@ export default function NavBar() {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/category/cursos-de-react" className="nav-link">
+            No existe
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" to="/category/calzado">
             Zapatillas
           </Link>

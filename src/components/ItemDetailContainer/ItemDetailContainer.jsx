@@ -7,6 +7,8 @@ import { cartContext } from "../../context/cartContext";
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState({});
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
   const { id } = useParams();
 
   const { addToCart } = useContext(cartContext);
@@ -23,8 +25,10 @@ function ItemDetailContainer() {
   function handleAddToCart(clickCount) {
     addToCart(product, clickCount);
     alert(`Producto agregado al carrito, cantidad: ${clickCount}`);
+    setIsAddedToCart(true);
   }
 
+  /* Separar esto en <ItemDetail .../> */
   return (
     <div style={{ marginBottom: "100px" }}>
       <Link to="/product/2">Ir al item 2</Link>
@@ -38,9 +42,17 @@ function ItemDetailContainer() {
         <h4>$ {product.price}</h4>
         <small>{product.description}</small>
       </div>
-
-      <ItemCount stock={4} onConfirm={handleAddToCart} />
-
+      {product.stock > 0 ? (
+        /* Si tenemos STOCK */
+        isAddedToCart ? (
+          <a href="/cart">Ir al carrito</a>
+        ) : (
+          <ItemCount stock={4} onConfirm={handleAddToCart} />
+        )
+      ) : (
+        // END si tenemos stock
+        <p>No hay stock disponible</p>
+      )}
       <Link to="/">
         <ButtonComponent>Volver al inicio</ButtonComponent>
       </Link>

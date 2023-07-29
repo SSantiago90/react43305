@@ -2,7 +2,7 @@ const productos = [
   {
     title: "Camiseta de fútbol",
     id: 1,
-    limit: 5,
+    stock: 0,
     description: "Camiseta de fútbol de alta calidad",
     img: "/assets/remera.bmp",
     price: 300,
