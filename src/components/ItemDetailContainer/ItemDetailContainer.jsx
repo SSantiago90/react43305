@@ -11,8 +11,15 @@ function ItemDetailContainer() {
 
   const { id } = useParams();
 
-  const { addToCart } = useContext(cartContext);
+  const { addToCart, getItemInCart } = useContext(cartContext);
 
+  const itemInCart = getItemInCart(id);
+
+  const maxItems = itemInCart
+    ? product.stock - itemInCart.count
+    : product.stock;
+
+  console.log(maxItems);
   useEffect(() => {
     async function requestProduct() {
       const respuesta = await getProductData(id);
@@ -47,11 +54,14 @@ function ItemDetailContainer() {
         isAddedToCart ? (
           <a href="/cart">Ir al carrito</a>
         ) : (
-          <ItemCount stock={4} onConfirm={handleAddToCart} />
+          <ItemCount stock={maxItems} onConfirm={handleAddToCart} />
         )
       ) : (
         // END si tenemos stock
         <p>No hay stock disponible</p>
+      )}
+      {itemInCart && (
+        <h2>Ya agregaste {itemInCart.count} unidades de este producto</h2>
       )}
       <Link to="/">
         <ButtonComponent>Volver al inicio</ButtonComponent>

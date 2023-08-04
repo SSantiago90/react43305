@@ -1,25 +1,25 @@
-.nav-menu{
+.nav-menu {
+  max-width: 100vw;
   list-style: none;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  margin: 0;  
+  margin: 0;
   height: 90px;
   background-color: rgb(233, 244, 75);
   top: 0;
   margin-bottom: 45px;
 }
 
-.nav-link{
+.nav-link {
   text-decoration: none;
-  font-weight:400;
+  font-weight: 400;
   font-size: 1.15em;
-  color:rgb(59, 59, 50)
+  color: rgb(59, 59, 50);
 }
 
-
-.nav-link:hover{
+.nav-link:hover {
   font-weight: 600;
-  color:rgb(19, 19, 17)
+  color: rgb(19, 19, 17);
 }

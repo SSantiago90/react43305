@@ -12,7 +12,8 @@ function CartContainer() {
     <div>
       <h1>Cart</h1>
       {cart.map((item) => (
-        <div>
+        <div key={item}>
+          {console.log(item.id)}
           <h2>{item.title}</h2>
           <p>Precio unitario: ${item.price}</p>
           <p>Cantidad a comprar{item.count}</p>
@@ -20,7 +21,6 @@ function CartContainer() {
           <button onClick={() => removeItem(item.id)}>Eliminiar</button>
         </div>
       ))}
-
       <br />
       <div>Total de la compra: $999</div>
       <button>Comprar</button>

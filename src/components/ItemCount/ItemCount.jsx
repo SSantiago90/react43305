@@ -27,15 +27,25 @@ function ItemCount(props) {
         }}
         className="item-count-container"
       >
-        <button className="item-count-button" onClick={handleClickSub}>
+        <button
+          disabled={props.stock === 0}
+          className="item-count-button"
+          onClick={handleClickSub}
+        >
           -
         </button>
         <h2 className="count-text">{clickCount}</h2>
-        <button className="item-count-button" onClick={handleClickAdd}>
+        <button
+          disabled={props.stock === 0}
+          className="item-count-button"
+          onClick={handleClickAdd}
+        >
           +
         </button>
       </div>
+
       <button
+        disabled={props.stock === 0}
         //onClick={ props.onConfirm } -> Solo invocar la funcion
         onClick={() => props.onConfirm(clickCount)} //-> Solo invocar la funcion + parametros
         //onClick={(event) => props.onConfirm(clickCount, event)} // > Solo invocar la funcion + parametros + objeto event
