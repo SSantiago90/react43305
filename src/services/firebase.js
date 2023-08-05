@@ -82,8 +82,6 @@ async function getOrder(id){
   const docSnapshot = await getDoc(docRef);
 
   return { ...docSnapshot.data(), id: docSnapshot.id };
- 
-
 }
 
 
@@ -264,7 +262,7 @@ async function _exportProductsWithBatch(){
     const newDoc = doc(db, "products", `1${newId}`)
     batch.set(newDoc, producto);    
   })
- 
+
   const data = await batch.commit()  
   console.log("Listo!", data)
 }
