@@ -8,18 +8,22 @@ import {
   getDoc,
   where,
   query,
+  addDoc,
+  setDoc,
+  writeBatch
 } from "firebase/firestore";
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAxrNA6yYJdIYj_gVmBrr1XIpTNESeFt28",
-  authDomain: "react-app-ecommerce-e961a.firebaseapp.com",
-  projectId: "react-app-ecommerce-e961a",
-  storageBucket: "react-app-ecommerce-e961a.appspot.com",
-  messagingSenderId: "681427159862",
-  appId: "1:681427159862:web:29e17ab3d1a4fa8b268197",
+  apiKey: "AIzaSyCHmBUcC4YP1uoSw95LIHo9CAx7kRPwn9g",
+  authDomain: "react43305.firebaseapp.com",
+  projectId: "react43305",
+  storageBucket: "react43305.appspot.com",
+  messagingSenderId: "384859310967",
+  appId: "1:384859310967:web:3bad2593d267b8ecc02f72"
 };
 
-//1. Inicializar Firebase & inicializar Firestore -> getFirestore
+
 const appFirebase = initializeApp(firebaseConfig);
 
 const db = getFirestore(appFirebase);
@@ -65,4 +69,204 @@ async function getCategoryData() {
   return documents.map((item) => ({ ...item.data(), id: item.id }));
 }
 
-export { getData, getProductData, getCategoryData };
+async function createOrder(orderData){
+  const collectionRef = collection(db, "orders")
+  const docCreated = await addDoc(collectionRef, orderData)
+
+  return(docCreated.id)
+}
+
+
+async function getOrder(id){
+  const docRef = doc(db, "orders", id);
+  const docSnapshot = await getDoc(docRef);
+
+  return { ...docSnapshot.data(), id: docSnapshot.id };
+ 
+
+}
+
+
+async function _exportProducts(){
+  const productos = [
+    {
+      title: "Camiseta de fútbol",
+      id: 1,
+      stock: 0,
+      description: "Camiseta de fútbol de alta calidad",
+      img: "/assets/remera.bmp",
+      price: 300,
+      category: "indumentaria",
+    },
+    {
+      title: "Zapatillas de running",
+      id: 2,
+      stock: 8,
+      description: "Zapatillas de running para entrenamiento",
+      img: "/assets/zapatilla.bmp",
+      price: 200,
+      category: "calzado",
+    },
+    {
+      title: "Shorts de baloncesto",
+      id: 3,
+      stock: 3,
+      description: "Shorts transpirables para baloncesto",
+      img: "/assets/shorts.bmp",
+      price: 150,
+      category: "indumentaria",
+    },
+    {
+      title: "Pelota de tenis",
+      id: 4,
+      stock: 2,
+      description: "Pelota de tenis oficial",
+      img: "/assets/pelotatennis.bmp",
+      price: 150,
+      category: "indumentaria",
+    },
+    {
+      title: "Camiseta de fútbol",
+      id: 5,
+      limit: 5,
+      description: "Camiseta de fútbol de alta calidad",
+      img: "/assets/remera.bmp",
+      price: 50,
+      category: "indumentaria",
+    },
+    {
+      title: "Zapatillas de running",
+      id: 6,
+      stock: 8,
+      description: "Zapatillas de running para entrenamiento",
+      img: "/assets/zapatilla.bmp",
+      price: 700,
+      category: "calzado",
+    },
+    {
+      title: "Shorts de baloncesto",
+      id: 7,
+      stock: 3,
+      description: "Shorts transpirables para baloncesto",
+      img: "/assets/shorts.bmp",
+      price: 250,
+      category: "indumentaria",
+    },
+    {
+      title: "Pelota de tenis",
+      id: 8,
+      stock: 2,
+      description: "Pelota de tenis oficial",
+      img: "/assets/pelotatennis.bmp",
+      price: 350,
+      category: "indumentaria",
+    },
+  ];
+
+  // for ... of
+  // productos.forEach( item => {})
+ /*  for(let item of productos){
+    console.log(item)
+    const docRef = doc(db, "products", String(item.id))
+    const docCreated = await setDoc(docRef, item);
+    console.log("Doc created with id:", docCreated.id)
+  } */
+
+  for(let item of productos){   
+    const collectionRef = collection(db, "products")
+    const docCreated = await addDoc(collectionRef, item);
+    console.log("Doc created with id:", docCreated.id)
+  }
+}
+
+
+async function _exportProductsWithBatch(){
+  const productos = [
+    {
+      title: "Camiseta de fútbol",
+      id: 1,
+      stock: 0,
+      description: "Camiseta de fútbol de alta calidad",
+      img: "/assets/remera.bmp",
+      price: 300,
+      category: "indumentaria",
+    },
+    {
+      title: "Zapatillas de running",
+      id: 2,
+      stock: 8,
+      description: "Zapatillas de running para entrenamiento",
+      img: "/assets/zapatilla.bmp",
+      price: 200,
+      category: "calzado",
+    },
+    {
+      title: "Shorts de baloncesto",
+      id: 3,
+      stock: 3,
+      description: "Shorts transpirables para baloncesto",
+      img: "/assets/shorts.bmp",
+      price: 150,
+      category: "indumentaria",
+    },
+    {
+      title: "Pelota de tenis",
+      id: 4,
+      stock: 2,
+      description: "Pelota de tenis oficial",
+      img: "/assets/pelotatennis.bmp",
+      price: 150,
+      category: "indumentaria",
+    },
+    {
+      title: "Camiseta de fútbol",
+      id: 5,
+      limit: 5,
+      description: "Camiseta de fútbol de alta calidad",
+      img: "/assets/remera.bmp",
+      price: 50,
+      category: "indumentaria",
+    },
+    {
+      title: "Zapatillas de running",
+      id: 6,
+      stock: 8,
+      description: "Zapatillas de running para entrenamiento",
+      img: "/assets/zapatilla.bmp",
+      price: 700,
+      category: "calzado",
+    },
+    {
+      title: "Shorts de baloncesto",
+      id: 7,
+      stock: 3,
+      description: "Shorts transpirables para baloncesto",
+      img: "/assets/shorts.bmp",
+      price: 250,
+      category: "indumentaria",
+    },
+    {
+      title: "Pelota de tenis",
+      id: 8,
+      stock: 2,
+      description: "Pelota de tenis oficial",
+      img: "/assets/pelotatennis.bmp",
+      price: 350,
+      category: "indumentaria",
+    },
+  ];
+
+  const batch = writeBatch(db); 
+
+  productos.forEach( producto => {
+    const newId = producto.id
+    delete producto.id;
+    const newDoc = doc(db, "products", `1${newId}`)
+    batch.set(newDoc, producto);    
+  })
+ 
+  const data = await batch.commit()  
+  console.log("Listo!", data)
+}
+
+export { getData, getOrder, getProductData, getCategoryData, createOrder, _exportProducts, _exportProductsWithBatch};
